@@ -55,6 +55,12 @@ void Gameplay::Init()
     // Inicjalizacja gracza
     m_context->m_assets->AddTexture(PLANE, "Assets/Textures/Objects/Player/PlaneFrames.png");
     player.Init(m_context->m_assets->GetTexture(PLANE));
+
+    // dodanie tekstury helikoptera
+    m_context->m_assets->AddTexture(HELICOPTER, "Assets/Textures/Objects/Helicopter/Helicop1.png");
+
+    // dodawanie tekstury
+    m_context->m_assets->AddTexture(BAT, "Assets/Textures/Objects/Bat/Bat1.png");
 }
 
 // Przetwarzanie wejścia
@@ -148,6 +154,51 @@ void Gameplay::Update(const sf::Time& deltaTime)
     // Aktualizacja tekstu punktacji
     m_scoreText.setString("Score: " + std::to_string(m_score));
 
+    // ENemy
+
+    lastspawned += deltaTime;//zwiêkszanie czasu od ostatniego pojawienia siê Enemy
+    lastspawnedbuff += deltaTime;//zwiêkszanie czasu od ostatniego pojawienia siê Buffs
+    fuelusage += deltaTime;//zwiêkszanie czasu od ostatniego pobrania paliwa
+    lastshot += deltaTime;//zwiêkszanie czasu od ostatniego strza³u
+    progression += deltaTime;  ////zwiêkszanie czasu od ostatniego zwiêkszenia trudnoœci
+
+    //respienie przeciwników w zale¿noœci od mijaj¹cego czasu
+    if(lastspawned.asSeconds()>(3-dificulty*0.3))
+    {   //losowanie typu przeciwnika
+        enemytype = rand() % 2;
+        if (enemytype == 0)
+        {   //losowanie pozycji przeciwnika
+            position = sf::Vector2f(800.f, rand() % 500);
+            //tworzenie wskaŸnika na Helicopter
+            enemies.emplace_back(std::make_unique<Helicopter>(m_context->m_assets->GetTexture(HELICOPTER),position));
+        }
+        else if (enemytype == 1)
+        {   //losowanie pozycji przeciwnika
+            position = sf::Vector2f(800.f, rand() % 500);
+            //tworzenie wskaŸnika na Baloon
+            enemies.emplace_back(std::make_unique<Bat>(m_context->m_assets->GetTexture(BAT),position));
+        }
+        lastspawned = sf::Time::Zero;//zerowanie czasu od ostatniego respu
+    }
+
+    for (auto& object : enemies)
+    {
+        if (object != nullptr)
+        {   //rzutowanie aby okreœliæ typ przeciwnika
+            if (auto* helicopter = dynamic_cast<Helicopter*>(object.get()))
+            {
+                helicopter->Animate(deltaTime);
+                helicopter->Movement(deltaTime, helicopter->getGlobalBounds(), m_context->m_window->getSize(), player.getPosition().y);
+            }
+            else if (auto* bat = dynamic_cast<Bat*>(object.get()))
+            {
+                bat->Animate(deltaTime);
+                bat->Movement(deltaTime, bat->getGlobalBounds(), m_context->m_window->getSize());
+            }
+        }
+    }
+
+
 
     // tu jest meijsce na ENDGAME
     /*
@@ -167,6 +218,16 @@ void Gameplay::Draw()
     for (const auto& cloud : clouds)
     {
         m_context->m_window->draw(cloud);
+    }
+
+    //renderowanie Enemy
+    for (auto& object : enemies)
+    {
+        if (object != nullptr)
+        {
+            m_context->m_window->draw(*object);
+
+        }
     }
 
     m_context->m_window->draw(m_scoreText);

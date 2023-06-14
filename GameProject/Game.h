@@ -43,6 +43,8 @@ enum AssetID
     CLOUD_6 = 19,
     PLANE = 13,
     BAR = 20,
+    HELICOPTER = 21,
+    BAT = 22,
 
 };
 // Enumy zawierająca identyfikatory zasobów.

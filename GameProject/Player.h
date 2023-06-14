@@ -25,7 +25,7 @@ class Player : public sf::Sprite
         int frame = 0; // Klatka
         const float framePerSecond = 1.0f / 12.0f; // Liczba klatek na sekundę
 
-        sf::Vector2f speed = sf::Vector2f(100.f, 70.f); // Prędkość gracza
+        sf::Vector2f speed = sf::Vector2f(110.f, 90.f); // Prędkość gracza
         sf::Vector2f gravity = sf::Vector2f(0.f, 10.f); // Wartość grawitacji
 
 

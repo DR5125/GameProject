@@ -5,10 +5,12 @@ CONFIG -= qt
 INCLUDEPATH += "C:\sfml\SFML-2.5.1\include"
 SOURCES += \
         assetsmanager.cpp \
+        bat.cpp \
         endgame.cpp \
         enemy.cpp \
         game.cpp \
         gameplay.cpp \
+        helicopter.cpp \
         main.cpp \
         menu.cpp \
         player.cpp \
@@ -23,10 +25,12 @@ SOURCES += \
 
 HEADERS += \
     AssetsManager.h \
+    Bat.h \
     EndGame.h \
     Enemy.h \
     Game.h \
     Gameplay.h \
+    Helicopter.h \
     Menu.h \
     Player.h \
     State.h \

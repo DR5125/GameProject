@@ -1,16 +1,19 @@
 #ifndef GAMEPLAY_H
 #define GAMEPLAY_H
 
+
 #include <memory>
 #include <array>
 #include <vector>
-
+#include "Bat.h"
+#include "Helicopter.h"
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
 
 #include "Player.h"
 #include "Game.h"
 #include "State.h"
+
 
 class Gameplay : public Engine::State
 {
@@ -47,6 +50,20 @@ class Gameplay : public Engine::State
         sf::Clock m_gameClock;        // Zegar mierzący czas gry
         sf::Text m_scoreText;         // Tekst wyświetlający punktację
         sf::Font m_font;              // Czcionka dla tekstu punktacji
+
+        // enenmy
+        int random_number;
+        int enemytype;//zmienna do losowania typu przeciwnika
+        sf::Time lastspawned;// Czas od ostatniego pojawienia się przeciwnika
+        sf::Time lastspawnedbuff;// Czas od ostatniego pojawienia się buffa
+        sf::Time lastshot=sf::Time::Zero;// Czas od ostatniego wystrzału
+        sf::Time fuelusage=sf::Time::Zero;// Czas od ostatniego zużycia paliwa
+        sf::Time progression=sf::Time::Zero;// Czas od ostatniego podniesienia trudności
+        int dificulty = 1;//współczynnik trudności
+        std::vector<std::unique_ptr<Enemy>> enemies;// Wektor unikalnych wskaźników na obiekty typu Enemy
+        sf::Vector2f position;
+        sf::Vector2f positionplayer;//pozycja gracza
+
 };
 
 #endif // GAMEPLAY_H
