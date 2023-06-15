@@ -3,11 +3,12 @@
 
 #include <SFML/Window/Event.hpp>
 
-EndGame::EndGame(std::shared_ptr<Context> &context)
+EndGame::EndGame(std::shared_ptr<Context> &context, int score)
     : m_context(context), m_isRetryButtonSelected(true),
       m_isRetryButtonPressed(false), m_isExitButtonSelected(false),
       m_isExitButtonPressed(false)
 {
+    points = score;
 }
 
 EndGame::~EndGame()
@@ -16,6 +17,11 @@ EndGame::~EndGame()
 
 void EndGame::Init()
 {
+    // wynik
+    scoring.setFont(m_context->m_assets->GetFont(MAIN_FONT));
+    scoring.setPosition(150.f, 100.f);
+    scoring.setString("Your score: "+std::to_string(points));
+    scoring.setCharacterSize(40);
 
     m_gameOverTitle.setFont(m_context->m_assets->GetFont(MAIN_FONT)); // Ustawienie czcionki dla tytułu gry
     m_gameOverTitle.setString("Game Over"); // Ustawienie tekstu dla tytułu gry
@@ -64,6 +70,7 @@ void EndGame::ProcessInput()
         if (event.type == sf::Event::Closed)
         {
             m_context->m_window->close();
+            std::cout << "tak";
         }
         else if (event.type == sf::Event::KeyPressed)
         {
@@ -114,6 +121,7 @@ void EndGame::ProcessInput()
 
 void EndGame::Update(const sf::Time& deltaTime)
 {
+
     if (m_isRetryButtonSelected)
     {
         m_retryButton.setFillColor(sf::Color::Black);
@@ -134,33 +142,6 @@ void EndGame::Update(const sf::Time& deltaTime)
     {
         m_context->m_window->close();
     }
-    // Animacja Księżyca
-    static const float MOON_FRAME_DURATION = 0.4f;    // Czas trwania jednej klatki Księżyca (w sekundach)
-    static float moonFrameTimer = 0.0f;               // Licznik czasu dla Księżyca
-    static unsigned int currentMoonFrame = 0;         // Bieżąca klatka Księżyca
-
-    // Animacja Stars
-    static const float STARS_FRAME_DURATION = 0.3f;   // Czas trwania jednej klatki Stars (w sekundach)
-    static float starsFrameTimer = 0.0f;              // Licznik czasu dla Stars
-    static unsigned int currentStarsFrame = 0;        // Bieżąca klatka Stars
-
-    moonFrameTimer += deltaTime.asSeconds(); // Zwiększaj licznik czasu dla klatek księżyca na podstawie czasu od ostatniej aktualizacji
-    starsFrameTimer += deltaTime.asSeconds(); // Zwiększaj licznik czasu dla klatek gwiazd na podstawie czasu od ostatniej aktualizacji
-
-    if (moonFrameTimer >= MOON_FRAME_DURATION) // Jeśli licznik czasu dla klatek księżyca przekroczy ustaloną wartość
-    {
-        moonFrameTimer = 0.0f; // Zresetuj licznik czasu
-        currentMoonFrame = (currentMoonFrame + 1) % moonFrames.size(); // Przełącz na następną klatkę księżyca, uwzględniając warunek cyklicznego indeksowania
-        m_MoonSprite.setTexture(moonFrames[currentMoonFrame]); // Ustaw nową teksturę dla sprite'a księżyca
-    }
-
-    if (starsFrameTimer >= STARS_FRAME_DURATION) // Jeśli licznik czasu dla klatek gwiazd przekroczy ustaloną wartość
-    {
-        starsFrameTimer = 0.0f; // Zresetuj licznik czasu
-        currentStarsFrame = (currentStarsFrame + 1) % starsFrames.size(); // Przełącz na następną klatkę gwiazd, uwzględniając warunek cyklicznego indeksowania
-        m_StarsSprite.setTexture(starsFrames[currentStarsFrame]); // Ustaw nową teksturę dla sprite'a gwiazd
-    }
-
     // Aktualizacja pozycji pierwszego tła
     static const float SKY_SCROLL_SPEED = 20.0f;  // Prędkość przewijania tła
     float offsetX = SKY_SCROLL_SPEED * deltaTime.asSeconds();  // Przesunięcie w osi X
@@ -196,9 +177,8 @@ void EndGame::Draw()
 {
     m_context->m_window->clear(sf::Color::Black);
     m_context->m_window->draw(m_SkySprite);
-    m_context->m_window->draw(m_MoonSprite);
-    m_context->m_window->draw(m_StarsSprite);
     m_context->m_window->draw(m_gameOverTitle);
+    m_context->m_window->draw(scoring);
     m_context->m_window->draw(m_retryButton);
     m_context->m_window->draw(m_exitButton);
     m_context->m_window->display();

@@ -11,29 +11,32 @@
 class EndGame : public Engine::State
 {
 public:
-    EndGame(std::shared_ptr<Context> &context);
+    EndGame(std::shared_ptr<Context> &context, int score);
     ~EndGame();
 
-    void Init() override;
-    void ProcessInput() override;
-    void Update(const sf::Time& deltaTime) override;
-    void Draw() override;
+    void Init() override;                            // Inicjalizacja stanu
+    void ProcessInput() override;                    // Obsługa wejścia
+    void Update(const sf::Time& deltaTime) override; // Aktualizacja logiki stanu
+    void Draw() override;                            // Rysowanie stanu
 
 private:
-    std::shared_ptr<Context> m_context;
+    std::shared_ptr<Context> m_context;              // Wskaźnik na kontekst gry
+
+    sf::Text scoring; // Tekst z wynikiem
+    int points; // Liczba zdobytych punktów
+
+    // Teksty używane w ekranie zakończenia gry
     sf::Text m_gameOverTitle;
     sf::Text m_retryButton;
     sf::Text m_exitButton;
 
+    // Grafiki używane w tle ekranu zakończenia gry
     sf::Texture m_Sky;
     sf::Sprite m_SkySprite;
     sf::Texture m_Sky_2;
     sf::Sprite m_Sky_2Sprite;
-    sf::Sprite m_MoonSprite;
-    sf::Sprite m_StarsSprite;
-    std::vector<sf::Texture> moonFrames;
-    std::vector<sf::Texture> starsFrames;
 
+    // Flagi informujące o stanie przycisków
     bool m_isRetryButtonSelected;
     bool m_isRetryButtonPressed;
 

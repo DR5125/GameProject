@@ -82,11 +82,20 @@ void Player::borders(sf::FloatRect bounds, sf::Vector2u window)
     {
         setPosition(getPosition().x, 1);
     }
-    else if (bounds.top + bounds.height >= window.y)
+    else if (bounds.top + bounds.height >= (window.y - 100))
     {
-        setPosition(getPosition().x, window.y - bounds.height - 1);
+        setPosition(getPosition().x, window.y - bounds.height -
+                    101);
     }
 }
 
+void Player::setScore(int i)
+{//ustawienie liczby punktów
+    score += i;
+}
 
+int Player::getScore()
+{//pobranie iloœci punktów
+    return score;
+}
 

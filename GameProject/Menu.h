@@ -5,6 +5,7 @@
 
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Window/Event.hpp>
 
 #include "State.h"
 #include "Game.h"
@@ -34,7 +35,7 @@ private:
     sf::Sprite m_StarsSprite;
     std::vector<sf::Texture> moonFrames;
     std::vector<sf::Texture> starsFrames;
-
+    sf::Event event;
     // Flagi oznaczające czy dany przycisk jest wybrany lub naciśnięty
     bool m_isPlayButtonSelected;
     bool m_isPlayButtonPressed;

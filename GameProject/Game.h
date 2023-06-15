@@ -49,8 +49,9 @@ enum AssetID
     EXPLOSION = 24,
     HEART = 25,
     FUEL = 26,
+    FUEL1 = 28,
     SCOREBAR = 27,
-
+    HEART1 = 29,
 };
 // Enumy zawierająca identyfikatory zasobów.
 // Każdy identyfikator reprezentuje inny zasób.

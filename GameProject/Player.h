@@ -22,6 +22,9 @@ class Player : public sf::Sprite
         void setFuel(int i); // Ustawienie poziomu paliwa
         int getLives(); // Pobranie poziomu życia
         int getFuel(); // Pobranie poziomu paliwa
+        void setScore(int i); // ustawenie wyniku
+        int getScore(); // pobieranie wyniku
+
 
     private:
         float elapsedAccumulator = 0; // Akumulator czasu
@@ -31,6 +34,7 @@ class Player : public sf::Sprite
         sf::Vector2f speed = sf::Vector2f(110.f, 90.f); // Prędkość gracza
         sf::Vector2f gravity = sf::Vector2f(0.f, 10.f); // Wartość grawitacji
 
+        int score = 0;
         int lives = 100;
         int fuel = 100;
 

@@ -1,9 +1,7 @@
-#include "Menu.h"
-
 #include "Gameplay.h"
-
+#include "Menu.h"
 #include "EndGame.h"
-#include <SFML/Window/Event.hpp>
+
 
 MainMenu::MainMenu(std::shared_ptr<Context> &context) : m_context(context), m_isPlayButtonSelected(true), m_isPlayButtonPressed(false), m_isExitButtonSelected(false),
       m_isExitButtonPressed(false) {}
@@ -34,33 +32,53 @@ void MainMenu::Init()
     starsFrames.push_back(m_context->m_assets->GetTexture(STARS_FRAME_3));
     starsFrames.push_back(m_context->m_assets->GetTexture(STARS_FRAME_4));
 
-    // Wczytanie czcionki
+    // wczytanie czcionki
     m_context->m_assets->AddFont(MAIN_FONT, "Assets/Fonts/Joystix/joystix.monospace.otf");
 
-    // Inicjalizacja gracza
+
+    // Wczytanie tekstur bohatera
     m_context->m_assets->AddTexture(PLANE, "Assets/Textures/Objects/Player/PlaneFrames.png");
-    // dodanie tekstury helikoptera
+
+    // Wczytanie tekstur helikoptera
     m_context->m_assets->AddTexture(HELICOPTER, "Assets/Textures/Objects/Helicopter/Helicop1.png");
 
-    // dodawanie tekstury
+    // Wczytanie tekstur nietoperza
     m_context->m_assets->AddTexture(BAT, "Assets/Textures/Objects/Bat/Bat1.png");
 
-    // dodawanie tekstury pociksu
+    // Wczytanie tekstury pociskow
     m_context->m_assets->AddTexture(FIREBALL, "Assets/Textures/Objects/Fireball/shots.png");
 
-    // dodanie tla do gamplay
+    // Wczytanie tekstury dla tla do gameplay
     m_context->m_assets->AddTexture(BACKGROUND_2, "Assets/Textures/Backgrounds/PerfectFlow.png");
     m_context->m_assets->AddTexture(BACKGROUND_3, "Assets/Textures/Backgrounds/PerfectFlowNext.png");
 
-    // elementy graficzne heart fuel
+    // Wczytanie tekstury dla serca i paliwa
     m_context->m_assets->AddTexture(HEART, "Assets/Textures/Objects/Heart/heart1.png");
+     m_context->m_assets->AddTexture(HEART1, "Assets/Textures/Objects/Heart/singleheart.png");
     m_context->m_assets->AddTexture(FUEL, "Assets/Textures/Objects/Fuel/betterfuel.png");
+    m_context->m_assets->AddTexture(FUEL1, "Assets/Textures/Objects/Fuel/FUEL1.png");
 
-    // Eksplozja
+    // Wczytanie tekstury eksplozji
     m_context->m_assets->AddTexture(EXPLOSION, "Assets/Textures/Objects/Explosion/finalexplo.png");
 
-    // bar na wynik
+    // Wczytanie tekstury tablicy na wynik
     m_context->m_assets->AddTexture(SCOREBAR, "Assets/Textures/Objects/Score/bar.png");
+
+    // Wczytanie tekstury tla menu
+    m_context->m_assets->AddTexture(BACKGROUND, "Assets/Textures/Backgrounds/ClearSkyBackground.png");
+    m_Sky = m_context->m_assets->GetTexture(BACKGROUND);
+
+    // Ustawienie sprite tła
+    m_SkySprite.setTexture(m_Sky);
+    m_SkySprite.setPosition(0.f, 0.f);
+
+    // Wczytanie tekstury kopii tla menu
+    m_context->m_assets->AddTexture(BACKGROUND_1, "Assets/Textures/Backgrounds/ClearSkyBackground.png");
+    m_Sky_2 = m_context->m_assets->GetTexture(BACKGROUND_1);
+
+    // Ustawienie sprite kopii tła
+    m_Sky_2Sprite.setTexture(m_Sky_2);
+    m_Sky_2Sprite.setPosition(m_SkySprite.getGlobalBounds().width, 0.f);
 
     // Tytuł
     m_gameTitle.setFont(m_context->m_assets->GetFont(MAIN_FONT)); // Ustawienie czcionki dla tytułu gry
@@ -85,30 +103,10 @@ void MainMenu::Init()
     m_exitButton.setOrigin(m_exitButton.getLocalBounds().width / 2, m_exitButton.getLocalBounds().height / 2); // Ustawienie punktu centralnego przycisku "Exit"
     m_exitButton.setPosition(m_context->m_window->getSize().x / 2, m_context->m_window->getSize().y / 2 + m_exitButton.getLocalBounds().height + 30.f); // Ustawienie pozycji przycisku "Exit"
     m_exitButton.setCharacterSize(30); // Ustawienie rozmiaru czcionki dla przycisku "Exit"
-
-    // Wczytaj teksturę tła
-    m_context->m_assets->AddTexture(BACKGROUND, "Assets/Textures/Backgrounds/ClearSkyBackground.png");
-    m_Sky = m_context->m_assets->GetTexture(BACKGROUND);
-
-    // Ustawienie sprite tła
-    m_SkySprite.setTexture(m_Sky);
-    m_SkySprite.setPosition(0.f, 0.f);
-
-    // Wczytaj teksture kopii tła
-    m_context->m_assets->AddTexture(BACKGROUND_1, "Assets/Textures/Backgrounds/ClearSkyBackground.png");
-    m_Sky_2 = m_context->m_assets->GetTexture(BACKGROUND_1);
-
-    // Ustawienie sprite kopii tła
-    m_Sky_2Sprite.setTexture(m_Sky_2);
-    m_Sky_2Sprite.setPosition(m_SkySprite.getGlobalBounds().width, 0.f);
-
-
-
 }
 
 void MainMenu::ProcessInput()
 {
-    sf::Event event;
     while (m_context->m_window->pollEvent(event))
     {
         if (event.type == sf::Event::Closed) // Jeśli zdarzenie to zamknięcie okna
@@ -169,7 +167,7 @@ void MainMenu::Update(const sf::Time& deltaTime)
         m_playButton.setFillColor(sf::Color::Black); // Ustaw kolor wypełnienia przycisku odtwarzania na czarny
         m_exitButton.setFillColor(sf::Color::White); // Ustaw kolor wypełnienia przycisku wyjścia na biały
     }
-    else // W przeciwnym razie
+    else
     {
         m_exitButton.setFillColor(sf::Color::Black); // Ustaw kolor wypełnienia przycisku wyjścia na czarny
         m_playButton.setFillColor(sf::Color::White); // Ustaw kolor wypełnienia przycisku odtwarzania na biały

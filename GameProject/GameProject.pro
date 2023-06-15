@@ -10,15 +10,17 @@ SOURCES += \
         enemy.cpp \
         explosion.cpp \
         fireball.cpp \
+        fuel.cpp \
         game.cpp \
         gameplay.cpp \
+        heart.cpp \
         helicopter.cpp \
         main.cpp \
         menu.cpp \
         player.cpp \
+        reinforcements.cpp \
         state.cpp \
-        statemanager.cpp \
-        textureobject.cpp
+        statemanager.cpp
         LIBS += -L"C:\sfml\SFML-2.5.1\lib"
         CONFIG(debug, debug|release){
             LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-network-d -lsfml-system-d -lsfml-window-d
@@ -33,11 +35,13 @@ HEADERS += \
     Enemy.h \
     Explosion.h \
     Fireball.h \
+    Fuel.h \
     Game.h \
     Gameplay.h \
+    Heart.h \
     Helicopter.h \
     Menu.h \
     Player.h \
+    Reinforcements.h \
     State.h \
-    StateManager.h \
-    TextureObject.h
+    StateManager.h
