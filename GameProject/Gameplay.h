@@ -5,14 +5,17 @@
 #include <memory>
 #include <array>
 #include <vector>
-#include "Bat.h"
-#include "Helicopter.h"
+
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
 
 #include "Player.h"
 #include "Game.h"
 #include "State.h"
+#include "Bat.h"
+#include "Helicopter.h"
+#include "Fireball.h"
+#include "Explosion.h"
 
 
 class Gameplay : public Engine::State
@@ -61,8 +64,23 @@ class Gameplay : public Engine::State
         sf::Time progression=sf::Time::Zero;// Czas od ostatniego podniesienia trudności
         int dificulty = 1;//współczynnik trudności
         std::vector<std::unique_ptr<Enemy>> enemies;// Wektor unikalnych wskaźników na obiekty typu Enemy
+        std::vector<std::unique_ptr<Fireball>> fireballs;// Wektor unikalnych wskaźników na obiekty typu Bullet
         sf::Vector2f position;
         sf::Vector2f positionplayer;//pozycja gracza
+
+        sf::RectangleShape health;// Pasek zdrowia
+        sf::RectangleShape underhealth;//tło paska zdrownia
+        sf::RectangleShape fuel;// Pasek paliwa
+        sf::RectangleShape underfuel;//tło paska paliwa
+
+        sf::Sprite heartSprite;
+        sf::Sprite fuelSprite;
+        sf::Texture fuealTexture;
+        sf::Texture heartTexture;
+
+        sf::Sprite scoreBarSp;
+        sf::Texture scoreBarTx;
+
 
 };
 

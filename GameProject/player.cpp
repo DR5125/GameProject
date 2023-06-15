@@ -10,7 +10,8 @@ Player::~Player() {}
 void Player::Init(const sf::Texture& texture)
 {
     setTexture(texture);
-    setPosition(400.0f, 400.0f);
+    setPosition(100.0f, 100.0f);
+    setTextureRect(sf::IntRect(0, 0, 150, 150));
 }
 
 // Animowanie gracza
@@ -26,6 +27,27 @@ void Player::Animate(const sf::Time& elapsed)
         frame++;
         frame %= 4;
     }
+}
+
+void Player::setLives(int i)
+{//ustawienie poziomu ¿ycia
+    lives += i;
+}
+
+void Player::setFuel(int i)
+{//ustawienie poziomu paliwa
+    fuel += i;
+}
+
+
+int Player::getLives()
+{//pobranie poziomu ¿ycia
+    return lives;
+}
+
+int Player::getFuel()
+{//pobranie poziomu paliwa
+    return fuel;
 }
 
 // Poruszanie się gracza

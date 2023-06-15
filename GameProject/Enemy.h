@@ -16,7 +16,7 @@ class Enemy: public sf::Sprite
         Enemy();
         ~Enemy();
 
-        virtual void borders(sf::FloatRect bounds, sf::Vector2u window);//metoda sprawdzajšca czy obiekty wychodzš poza ekran i przenoszšca je
+        virtual void borders(sf::FloatRect bounds, sf::Vector2u window); //metoda sprawdzajšca czy obiekty wychodzš poza ekran i przenoszšca je
 
 
 

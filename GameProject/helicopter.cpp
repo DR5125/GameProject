@@ -42,7 +42,7 @@ void Helicopter::Movement(sf::Time DeltaTime, sf::FloatRect bounds, sf::Vector2u
     {
         move(speed.x * DeltaTime.asSeconds(), speed.y * DeltaTime.asSeconds() * (-1));
     }
-    this->borders( bounds,window);//odwo³anie do funkcji klasy Enemy
+    borders( bounds,window); //odwo³anie do funkcji klasy Enemy
 }
 
 void Helicopter::setlives()

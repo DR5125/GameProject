@@ -45,6 +45,11 @@ enum AssetID
     BAR = 20,
     HELICOPTER = 21,
     BAT = 22,
+    FIREBALL = 23,
+    EXPLOSION = 24,
+    HEART = 25,
+    FUEL = 26,
+    SCOREBAR = 27,
 
 };
 // Enumy zawierająca identyfikatory zasobów.

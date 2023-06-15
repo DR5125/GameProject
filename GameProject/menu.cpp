@@ -37,6 +37,30 @@ void MainMenu::Init()
     // Wczytanie czcionki
     m_context->m_assets->AddFont(MAIN_FONT, "Assets/Fonts/Joystix/joystix.monospace.otf");
 
+    // Inicjalizacja gracza
+    m_context->m_assets->AddTexture(PLANE, "Assets/Textures/Objects/Player/PlaneFrames.png");
+    // dodanie tekstury helikoptera
+    m_context->m_assets->AddTexture(HELICOPTER, "Assets/Textures/Objects/Helicopter/Helicop1.png");
+
+    // dodawanie tekstury
+    m_context->m_assets->AddTexture(BAT, "Assets/Textures/Objects/Bat/Bat1.png");
+
+    // dodawanie tekstury pociksu
+    m_context->m_assets->AddTexture(FIREBALL, "Assets/Textures/Objects/Fireball/shots.png");
+
+    // dodanie tla do gamplay
+    m_context->m_assets->AddTexture(BACKGROUND_2, "Assets/Textures/Backgrounds/PerfectFlow.png");
+    m_context->m_assets->AddTexture(BACKGROUND_3, "Assets/Textures/Backgrounds/PerfectFlowNext.png");
+
+    // elementy graficzne heart fuel
+    m_context->m_assets->AddTexture(HEART, "Assets/Textures/Objects/Heart/heart1.png");
+    m_context->m_assets->AddTexture(FUEL, "Assets/Textures/Objects/Fuel/betterfuel.png");
+
+    // Eksplozja
+    m_context->m_assets->AddTexture(EXPLOSION, "Assets/Textures/Objects/Explosion/finalexplo.png");
+
+    // bar na wynik
+    m_context->m_assets->AddTexture(SCOREBAR, "Assets/Textures/Objects/Score/bar.png");
 
     // Tytuł
     m_gameTitle.setFont(m_context->m_assets->GetFont(MAIN_FONT)); // Ustawienie czcionki dla tytułu gry
@@ -77,6 +101,9 @@ void MainMenu::Init()
     // Ustawienie sprite kopii tła
     m_Sky_2Sprite.setTexture(m_Sky_2);
     m_Sky_2Sprite.setPosition(m_SkySprite.getGlobalBounds().width, 0.f);
+
+
+
 }
 
 void MainMenu::ProcessInput()

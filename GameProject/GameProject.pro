@@ -8,6 +8,8 @@ SOURCES += \
         bat.cpp \
         endgame.cpp \
         enemy.cpp \
+        explosion.cpp \
+        fireball.cpp \
         game.cpp \
         gameplay.cpp \
         helicopter.cpp \
@@ -15,7 +17,8 @@ SOURCES += \
         menu.cpp \
         player.cpp \
         state.cpp \
-        statemanager.cpp
+        statemanager.cpp \
+        textureobject.cpp
         LIBS += -L"C:\sfml\SFML-2.5.1\lib"
         CONFIG(debug, debug|release){
             LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-network-d -lsfml-system-d -lsfml-window-d
@@ -28,10 +31,13 @@ HEADERS += \
     Bat.h \
     EndGame.h \
     Enemy.h \
+    Explosion.h \
+    Fireball.h \
     Game.h \
     Gameplay.h \
     Helicopter.h \
     Menu.h \
     Player.h \
     State.h \
-    StateManager.h
+    StateManager.h \
+    TextureObject.h
